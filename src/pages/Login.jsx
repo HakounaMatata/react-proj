@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
   const [form, setForm] = useState({ username: "", password: "" });
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) =>
@@ -11,11 +13,14 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (form.username === "admin" && form.password === "1234") {
-      localStorage.setItem("loggedIn", "true");
+    const USER = "admin";
+    const PASS = "1234";
+
+    if (form.username === USER && form.password === PASS) {
+      login();
       navigate("/dashboard");
     } else {
-      alert("Wrong username or password");
+      alert("Wrong username or password!");
     }
   };
 

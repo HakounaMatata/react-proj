@@ -1,12 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
 export default function Sidebar() {
-  const navigate = useNavigate();
-
-  const logout = () => {
-    localStorage.removeItem("loggedIn");
-    navigate("/login");
-  };
+  const { logout } = useAuth();
 
   return (
     <div className="w-48 h-screen bg-gray-800 text-white p-4 space-y-3">
